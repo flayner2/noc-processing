@@ -14,7 +14,7 @@ void draw() {
     
     for (int y = 0; y < height; y++) {
       //noiseDetail(4, 0.7);
-      float noise_val = noise(xoff + time_step, yoff + time_step);
+      float noise_val = noise(xoff, yoff + time_step);
       color col;
       
       if (noise_val < 0.5) {
