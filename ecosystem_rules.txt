@@ -1,0 +1,4 @@
+stragglers -> move around randomly, but avoid collisions with anyone
+chasers -> chase the nearest non-chaser and feed on them if they collide
+groupers -> try to flock with nearby groupers and avoid chasers
+impostors -> try to invade a grouper flock if there's no impostor already in it
