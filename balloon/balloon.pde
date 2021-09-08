@@ -1,27 +1,28 @@
 Mover mover;
-PVector helium;
-float noiseX = 0, noiseY = 0;
+PVector helium, gravity;
+float noiseX = 0;
 
 void setup() {
   size(640, 360);
   background(255);
   mover = new Mover();
-  helium = new PVector(0, -0.01);
+  helium = new PVector(0, -0.001);
+  gravity = new PVector(0, -0.0001);
 }
 
 void draw() {
   background(255);
   
-  PVector wind = new PVector(map(noise(noiseX), 0, 1, -0.001, 0.001), map(noise(noiseY), 0, 1, -0.03, 0.03));
+  PVector wind = new PVector(map(noise(noiseX), 0, 1, -0.001, 0.001), 0);
   
   mover.update();
   mover.checkCorners();
   mover.display();
   mover.applyForce(helium);
   mover.applyForce(wind);
+  mover.applyForce(gravity);
   
   noiseX += 0.001;
-  noiseY += 0.001;
 }
 
 class Mover {
@@ -51,15 +52,11 @@ class Mover {
   
   void checkCorners() {
     if ((location.x - 8.75) <= 0 || (location.x + 8.75) >= width) {
-      //velocity.x = 0;
-      //acceleration.x = acceleration.x * -1;
-      velocity.x = velocity.x * -1;
+      velocity.x = velocity.x * -0.5;
     }
     
     if ((location.y - 12.5) <= 0 || (location.y + 12.5) >= height) {
-      //velocity.y = 0;
-      //acceleration.y = acceleration.y * -1;
-      velocity.y = velocity.y * -1;
+      velocity.y = velocity.y * -0.5;
     }
   }
   
